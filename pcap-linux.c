@@ -1477,6 +1477,8 @@ pcap_read_packet(pcap_t *handle, pcap_handler callback, u_char *userdata)
 		    from.sll_ifindex != handle->md.ifindex)
 			return 0;
 
+		pcap_header.ifindex = from.sll_ifindex;
+
 		/*
 		 * Do checks based on packet direction.
 		 * We can only do this if we're using PF_PACKET; the
@@ -1498,6 +1500,7 @@ pcap_read_packet(pcap_t *handle, pcap_handler callback, u_char *userdata)
 			 */
 			if (handle->direction == PCAP_D_IN)
 				return 0;
+			pcap_header.direction = PCAP_D_OUT;
 		} else {
 			/*
 			 * Incoming packet.
@@ -1505,6 +1508,7 @@ pcap_read_packet(pcap_t *handle, pcap_handler callback, u_char *userdata)
 			 */
 			if (handle->direction == PCAP_D_OUT)
 				return 0;
+			pcap_header.direction = PCAP_D_IN;
 		}
 	}
 #endif
@@ -3891,6 +3895,11 @@ pcap_read_linux_mmap(pcap_t *handle, int max_packets, pcap_handler callback,
 		pcaphdr.ts.tv_usec = tp_usec;
 		pcaphdr.caplen = tp_snaplen;
 		pcaphdr.len = tp_len;
+		pcaphdr.ifindex = sll->sll_ifindex;
+		if(sll->sll_pkttype == PACKET_OUTGOING)
+			pcaphdr.direction = PCAP_D_OUT;
+		else
+			pcaphdr.direction = PCAP_D_IN;
 
 		/* if required build in place the sll header*/
 		if (handle->md.cooked) {

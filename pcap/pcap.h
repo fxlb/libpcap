@@ -163,6 +163,10 @@ struct pcap_pkthdr {
 	struct timeval ts;	/* time stamp */
 	bpf_u_int32 caplen;	/* length of portion present */
 	bpf_u_int32 len;	/* length this packet (off wire) */
+#ifdef PF_PACKET
+	int ifindex;            	/* interface index (Linux only) */
+	pcap_direction_t direction;	/* incomming or outgoing */
+#endif
 };
 
 /*
