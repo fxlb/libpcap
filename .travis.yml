@@ -90,7 +90,7 @@ script:
   - if [ "$CMAKE" = yes ]; then cmake -DCMAKE_INSTALL_PREFIX=/tmp $ENABLE_REMOTE ..; fi
   - if [ "$CMAKE" = yes ]; then echo -n travis_fold:end:script.cmake; fi
   - make -s all
-  - file *.o
+  - if [ "$CMAKE" = no ]; then file *.o; fi
   - make -s testprogs
   - echo '$ make install [...]' && echo -n travis_fold:start:script.make_install
   - PATH=$PATH make install
