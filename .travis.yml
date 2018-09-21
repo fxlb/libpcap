@@ -71,7 +71,7 @@ script:
   - if [ "$COVERITY_SCAN_BRANCH" = 1 ]; then exit 0; fi
   - touch .devel configure
   - if [ "$CMAKE" = no ]; then echo '$ ./configure [...]' && echo -n travis_fold:start:script.configure; fi
-  - if [ "$CMAKE" = no ]; then ./configure --prefix=/tmp "--${REMOTE}-remote"; fi
+  - if [ "$CMAKE" = no ]; then ./configure --enable-optimizer-dbg --prefix=/tmp "--${REMOTE}-remote"; fi
   - if [ "$CMAKE" = no ]; then echo -n travis_fold:end:script.configure; fi
   - if [ "$CMAKE" = yes ]; then mkdir build; fi
   - if [ "$CMAKE" = yes ]; then cd build; fi
