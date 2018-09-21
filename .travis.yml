@@ -21,10 +21,14 @@ env:
     # usual processing: false.
     - coverity_scan_script_test_mode=false
   matrix:
-    - REMOTE=disable CMAKE=no
-    - ENABLE_REMOTE="" CMAKE=yes
-    - REMOTE=enable CMAKE=no
-    - ENABLE_REMOTE="-DENABLE_REMOTE=ON" CMAKE=yes
+    - ARCH=32 REMOTE=disable CMAKE=no
+    - ARCH=32 ENABLE_REMOTE="" CMAKE=yes
+    - ARCH=32 REMOTE=enable CMAKE=no
+    - ARCH=32 ENABLE_REMOTE="-DENABLE_REMOTE=ON" CMAKE=yes
+    - ARCH=64 REMOTE=disable CMAKE=no
+    - ARCH=64 ENABLE_REMOTE="" CMAKE=yes
+    - ARCH=64 REMOTE=enable CMAKE=no
+    - ARCH=64 ENABLE_REMOTE="-DENABLE_REMOTE=ON" CMAKE=yes
 
 matrix:
   fast_finish: true
@@ -49,11 +53,18 @@ addons:
     branch_pattern: coverity_scan
   apt:
     packages:
+      - gcc-multilib
       - libusb-1.0-0-dev
       - libdbus-glib-1-dev
       - libbluetooth-dev
       - libnl-genl-3-dev
       - libibverbs-dev
+      - libc6:i386
+      - libusb-1.0-0-dev:i386
+      - libdbus-glib-1-dev:i386
+      - libbluetooth-dev:i386
+      - libnl-genl-3-dev:i386
+      - libibverbs-dev:i386
 
 git:
   quiet: true
@@ -71,7 +82,7 @@ script:
   - if [ "$COVERITY_SCAN_BRANCH" = 1 ]; then exit 0; fi
   - touch .devel configure
   - if [ "$CMAKE" = no ]; then echo '$ ./configure [...]' && echo -n travis_fold:start:script.configure; fi
-  - if [ "$CMAKE" = no ]; then ./configure --prefix=/tmp "--${REMOTE}-remote"; fi
+  - if [ "$CMAKE" = no ]; then LDFLAGS="-m${ARCH}" CFLAGS="-m${ARCH}" ./configure --prefix=/tmp "--${REMOTE}-remote"; fi
   - if [ "$CMAKE" = no ]; then echo -n travis_fold:end:script.configure; fi
   - if [ "$CMAKE" = yes ]; then mkdir build; fi
   - if [ "$CMAKE" = yes ]; then cd build; fi
@@ -79,6 +90,7 @@ script:
   - if [ "$CMAKE" = yes ]; then cmake -DCMAKE_INSTALL_PREFIX=/tmp $ENABLE_REMOTE ..; fi
   - if [ "$CMAKE" = yes ]; then echo -n travis_fold:end:script.cmake; fi
   - make -s all
+  - file *.o
   - make -s testprogs
   - echo '$ make install [...]' && echo -n travis_fold:start:script.make_install
   - PATH=$PATH make install
