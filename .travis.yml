@@ -61,10 +61,10 @@ addons:
       - libibverbs-dev
       - libc6:i386
       - libusb-1.0-0-dev:i386
-      - libdbus-glib-1-dev:i386
+#      - libdbus-glib-1-dev:i386
 #      - libbluetooth-dev:i386
 #      - libnl-genl-3-dev:i386
-#      - libibverbs-dev:i386
+      - libibverbs-dev:i386
 
 git:
   quiet: true
