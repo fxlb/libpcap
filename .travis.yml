@@ -73,7 +73,7 @@ git:
 before_install:
   - uname -a
   - date
-  - sudo apt-get update
+#  - sudo apt-get update
   - if [ "$TRAVIS_OS_NAME" = linux -a "$ARCH" = 32 ]; then sudo apt-get install -y cpp-4.8 gcc-4.8 gcc-4.8-multilib gcc-multilib libc6:i386 libusb-1.0-0-dev:i386 libglib2.0-dev:i386 libdbus-glib-1-dev:i386 libbluetooth-dev:i386 libnl-genl-3-dev:i386 libibverbs-dev:i386; fi
   - if [ "$TRAVIS_OS_NAME" = linux -a "$ARCH" = 64 ]; then sudo apt-get install -y libusb-1.0-0-dev libdbus-glib-1-dev libbluetooth-dev libnl-genl-3-dev libibverbs-dev; fi
 
