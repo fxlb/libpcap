@@ -103,4 +103,10 @@ script:
   - if [ "$CMAKE" = no ]; then echo '$ cat config.log'; echo travis_fold:start:script.cat_config_log; fi
   - if [ "$CMAKE" = no ]; then cat config.log; fi
   - if [ "$CMAKE" = no ]; then echo -n travis_fold:end:script.cat_config_log; fi
+  - if [ "$CMAKE" = yes ]; then echo '$ cat CMakeFiles/CMakeOutput.log'; echo travis_fold:start:script.cat_cmakeoutput_log; fi
+  - if [ "$CMAKE" = yes ]; then cat CMakeFiles/CMakeOutput.log; fi
+  - if [ "$CMAKE" = yes ]; then echo -n travis_fold:end:script.cat_cmakeoutput_log; fi
+  - if [ "$CMAKE" = yes ]; then echo '$ cat CMakeFiles/CMakeError.log'; echo travis_fold:start:script.cat_cmakeoutput_log; fi
+  - if [ "$CMAKE" = yes ]; then cat CMakeFiles/CMakeError.log; fi
+  - if [ "$CMAKE" = yes ]; then echo -n travis_fold:end:script.cat_cmakeerror_log; fi
   - if [ "$TRAVIS_OS_NAME" = osx ]; then sleep 10; fi
