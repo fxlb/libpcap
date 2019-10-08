@@ -1,5 +1,9 @@
 language: c
 
+arch:
+  - amd64
+  - arm64
+
 os:
   - linux
   - osx
@@ -66,6 +70,8 @@ git:
 before_install:
   - uname -a
   - date
+  - echo "$TRAVIS_ARCH"
+  - if [ "$TRAVIS_ARCH" = aarch64 -a "$TRAVIS_OS_NAME" = osx ]; then exit 0; fi
   - if [ "$TRAVIS_OS_NAME" = linux ]; then dpkg-query -f '${Package}__${Version}__${Architecture}\n' -W 'lib*-dev'; fi
   - if [ "$TRAVIS_OS_NAME" = linux ]; then sudo curl -s -L https://entrust.com/root-certificates/entrust_l1k.cer -o /usr/local/share/ca-certificates/entrust_l1k.crt; fi
   - if [ "$TRAVIS_OS_NAME" = linux ]; then sudo update-ca-certificates; fi
