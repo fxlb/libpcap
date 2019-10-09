@@ -57,6 +57,7 @@ addons:
       - libbluetooth-dev
       - libnl-genl-3-dev
       - libibverbs-dev
+      - pciutils
 
 git:
   quiet: true
