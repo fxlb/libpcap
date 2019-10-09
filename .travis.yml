@@ -74,6 +74,7 @@ before_install:
   - sudo /sbin/ifconfig -a
   - sudo sysctl -w kernel.dmesg_restrict=0
   - sudo sysctl kernel.dmesg_restrict=0
+  - sudo bash -c 'echo 0 > /proc/sys/kernel/dmesg_restrict'
   - sudo dmesg
   - dmesg
   - echo "$TRAVIS_ARCH"
