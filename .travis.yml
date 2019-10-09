@@ -58,6 +58,7 @@ addons:
       - libnl-genl-3-dev
       - libibverbs-dev
       - pciutils
+      - net-tools
 
 git:
   quiet: true
