@@ -72,6 +72,7 @@ before_install:
   - ip -6 a
   - ip r
   - sudo /sbin/ifconfig -a
+  - sudo sysctl -w kernel.dmesg_restrict=0
   - sudo dmesg
   - echo "$TRAVIS_ARCH"
   - if [ "$TRAVIS_ARCH" = aarch64 -a "$TRAVIS_OS_NAME" = osx ]; then exit 0; fi
