@@ -73,7 +73,9 @@ before_install:
   - ip r
   - sudo /sbin/ifconfig -a
   - sudo sysctl -w kernel.dmesg_restrict=0
+  - sudo sysctl kernel.dmesg_restrict=0
   - sudo dmesg
+  - dmesg
   - echo "$TRAVIS_ARCH"
   - if [ "$TRAVIS_ARCH" = aarch64 -a "$TRAVIS_OS_NAME" = osx ]; then exit 0; fi
   - if [ "$TRAVIS_OS_NAME" = linux ]; then dpkg-query -f '${Package}__${Version}__${Architecture}\n' -W 'lib*-dev'; fi
