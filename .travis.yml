@@ -6,13 +6,11 @@ arch:
 
 os:
   - linux
-  - osx
 
 dist: bionic
 
 compiler:
   - gcc
-  - clang
 
 cache: ccache
 
@@ -29,10 +27,7 @@ env:
     - coverity_scan_script_test_mode=false
     - MAKEFLAGS='-j 2' # Travis CI VMs come with 2 cores
   matrix:
-    - REMOTE=disable CMAKE=no
-    - ENABLE_REMOTE="" CMAKE=yes
     - REMOTE=enable CMAKE=no
-    - ENABLE_REMOTE="-DENABLE_REMOTE=ON" CMAKE=yes
 
 matrix:
   fast_finish: true
@@ -70,6 +65,12 @@ git:
 before_install:
   - uname -a
   - date
+  - lspci
+  - ip -4 a
+  - ip -6 a
+  - ip r
+  - sudo /sbin/ifconfig -a
+  - sudo dmesg
   - echo "$TRAVIS_ARCH"
   - if [ "$TRAVIS_ARCH" = aarch64 -a "$TRAVIS_OS_NAME" = osx ]; then exit 0; fi
   - if [ "$TRAVIS_OS_NAME" = linux ]; then dpkg-query -f '${Package}__${Version}__${Architecture}\n' -W 'lib*-dev'; fi
