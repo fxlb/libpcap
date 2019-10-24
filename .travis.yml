@@ -74,10 +74,11 @@ install:
 
 before_script:
   - if [ "$TRAVIS_OS_NAME" = osx ]; then brew install iproute2mac | grep -v '%'; fi
-  - ip l
-  - ip a
-  - ip r
-  - ifconfig -a
+  - ip l||true
+  - ip a||true
+  - ip r||true
+  - ifconfig -a||true
+  - if [ "$TRAVIS_OS_NAME" = osx ]; then sleep 10; fi
 
 script:
   - if [ "$COVERITY_SCAN_BRANCH" = 1 ]; then exit 0; fi
