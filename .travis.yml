@@ -6,9 +6,9 @@ language: c
 #
 arch:
   - amd64
-  - ppc64le
-  - s390x
-  - arm64
+# - ppc64le
+# - s390x
+# - arm64
 
 os:
   - linux
@@ -18,7 +18,7 @@ dist: focal
 
 compiler:
   - gcc
-  - clang
+# - clang
 
 #
 # Linux runs on all of the architectures listed above; macOS runs on
@@ -56,10 +56,10 @@ env:
     - coverity_scan_script_test_mode=false
     - MAKEFLAGS='-j 2' # Travis CI VMs come with 2 cores
   matrix:
-    - REMOTE=disable CMAKE=no
-    - ENABLE_REMOTE="" CMAKE=yes
+#   - REMOTE=disable CMAKE=no
+#   - ENABLE_REMOTE="" CMAKE=yes
     - REMOTE=enable CMAKE=no
-    - ENABLE_REMOTE="-DENABLE_REMOTE=ON" CMAKE=yes
+#   - ENABLE_REMOTE="-DENABLE_REMOTE=ON" CMAKE=yes
 
 matrix:
   fast_finish: true
@@ -97,6 +97,7 @@ before_install:
   - uname -a
   - date
   - if [ "$TRAVIS_OS_NAME" = linux ]; then apt list --installed 'lib*-dev'; fi
+  - export
 
 install:
 
