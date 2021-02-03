@@ -14,7 +14,7 @@ os:
   - linux
   - osx
 
-dist: focal
+dist: bionic
 
 #
 # Linux runs on all of the architectures listed above; macOS runs on
