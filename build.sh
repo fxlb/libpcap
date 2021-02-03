@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # This script runs one build with exported variables setup: CC, CMAKE and
 # REMOTE (default: gcc, no (cmake), disable (remote)).
