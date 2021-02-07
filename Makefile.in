@@ -419,9 +419,7 @@ all: libpcap.a shared $(BUILD_RPCAPD) libpcap.pc pcap-config
 
 gencode.c: grammar.h scanner.h
 
-grammar.y.in: grammar.h scanner.h
-
-scanner.l: grammar.h
+grammar.y.in: scanner.h
 
 #$ git grep '"grammar.h"'
 #gencode.c:#include "grammar.h"
