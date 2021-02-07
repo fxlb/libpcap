@@ -417,6 +417,22 @@ EXTRA_DIST = \
 
 all: libpcap.a shared $(BUILD_RPCAPD) libpcap.pc pcap-config
 
+gencode.c: grammar.h scanner.h
+
+grammar.y.in: grammar.h scanner.h
+
+scanner.l: grammar.h
+
+#$ git grep '"grammar.h"'
+#gencode.c:#include "grammar.h"
+#grammar.y.in:#include "grammar.h"
+#scanner.l:#include "grammar.h"
+#scanner.l:#include "grammar.h"
+
+#$ git grep '"scanner.h"'
+#gencode.c:#include "scanner.h"
+#grammar.y.in:#include "scanner.h"
+
 libpcap.a: $(OBJ)
 	@rm -f $@
 	$(AR) rc $@ $(OBJ) $(ADDLARCHIVEOBJS)
