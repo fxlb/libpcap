@@ -20,11 +20,11 @@ install:
 
 before_script:
   - ./configure
-  - ls -l scanner.h grammar.h grammar.c scanner.c
+  - ls -l scanner.h grammar.h grammar.c scanner.c || true
   - make clean
-  - ls -l scanner.h grammar.h grammar.c scanner.c
+  - ls -l scanner.h grammar.h grammar.c scanner.c || true
 
 script:
   - make
-  - ls -l scanner.h grammar.h grammar.c scanner.c
+  - ls -l scanner.h grammar.h grammar.c scanner.c || true
   - if [ "$TRAVIS_OS_NAME" = osx ]; then sleep 10; fi
