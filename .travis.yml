@@ -22,10 +22,16 @@ before_script:
 
 script:
   - touch .devel
+  - echo configure
   - ./configure
+  - echo ls -l
   - ls -l scanner.h grammar.h grammar.c scanner.c || true
+  - echo make clean
   - make clean
+  - echo ls -l
   - ls -l scanner.h grammar.h grammar.c scanner.c || true
+  - echo make
   - make
+  - echo ls -l
   - ls -l scanner.h grammar.h grammar.c scanner.c || true
   - if [ "$TRAVIS_OS_NAME" = osx ]; then sleep 10; fi
