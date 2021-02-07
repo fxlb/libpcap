@@ -12,6 +12,9 @@ git:
   quiet: true
   depth: 3
 
+env:
+  - MAKEFLAGS='-j 2'
+
 before_install:
   - uname -a
   - date
