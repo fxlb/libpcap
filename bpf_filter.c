@@ -218,10 +218,12 @@ DIAG_ON_DEFAULT_ONLY_SWITCH
 
 		case BPF_LD|BPF_MEM:
 			A = mem[pc->k];
+			abort();
 			continue;
 
 		case BPF_LDX|BPF_MEM:
 			X = mem[pc->k];
+			abort();
 			continue;
 
 		case BPF_ST:
