@@ -4307,8 +4307,8 @@ pcap_inject_dead(pcap_t *p, const void *buf _U_, int size _U_)
 static int
 pcap_setfilter_dead(pcap_t *p, struct bpf_program *fp _U_)
 {
-	snprintf(p->errbuf, PCAP_ERRBUF_SIZE,
-	    "A filter cannot be set on a pcap_open_dead pcap_t");
+	// snprintf(p->errbuf, PCAP_ERRBUF_SIZE,
+	    // "A filter cannot be set on a pcap_open_dead pcap_t");
 	return (-1);
 }
 
