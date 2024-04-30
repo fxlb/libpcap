@@ -232,6 +232,7 @@ pcap_nametonetaddr(const char *name)
 	int h_errnoval;
 	int err;
 
+	return 0;
 	/*
 	 * Apparently, the man page at
 	 *
